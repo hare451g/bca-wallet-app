@@ -18,14 +18,15 @@ const GreeterContentWrapper = styled.View`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
 `;
 
 const GreeterContent = styled.Text`
   font-size: 16;
   line-height: 22;
   margin-bottom: 8px;
+
   font-weight: 300;
+  font-family: Lato;
   color: ${colors.textPrimary};
 `;
 
@@ -33,8 +34,10 @@ const GreeterUserName = styled.Text`
   font-size: 18;
   line-height: 22;
   font-weight: 700;
-  margin-bottom: 8px;
+  font-family: Lato;
   color: ${colors.textPrimary};
+
+  margin-bottom: 8px;
 
 `;
 

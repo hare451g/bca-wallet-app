@@ -26,6 +26,8 @@ const MenuButtonIcon = styled.TouchableOpacity`
 const MenuButtonText = styled.Text`
   color: ${colors.textPrimary};
   font-size: 14;
+  font-weight: 300;
+  font-family: Lato;
   text-align: center;
 `;
 
