@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { colors } from '../../configs/themes';
 
 const GreeterWrapper = styled.View`
@@ -7,7 +8,8 @@ const GreeterWrapper = styled.View`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 32px;
 
   background-color: ${colors.background};
 `;
@@ -25,7 +27,7 @@ const GreeterContent = styled.Text`
   line-height: 22;
   margin-bottom: 8px;
 
-  font-weight: 300;
+  font-weight: 100;
   font-family: Lato;
   color: ${colors.textPrimary};
 `;
@@ -33,7 +35,7 @@ const GreeterContent = styled.Text`
 const GreeterUserName = styled.Text`
   font-size: 18;
   line-height: 22;
-  font-weight: 700;
+  font-weight: bold;
   font-family: Lato;
   color: ${colors.textPrimary};
 
