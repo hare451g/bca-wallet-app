@@ -25,7 +25,7 @@ const GreeterContentWrapper = styled.View`
 const GreeterContent = styled.Text`
   font-size: 16;
   line-height: 22;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 
   font-weight: 100;
   font-family: Lato;
@@ -33,7 +33,7 @@ const GreeterContent = styled.Text`
 `;
 
 const GreeterUserName = styled.Text`
-  font-size: 18;
+  font-size: 20;
   line-height: 22;
   font-weight: bold;
   font-family: Lato;
