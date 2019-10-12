@@ -2,22 +2,21 @@ import React from 'react';
 import {
   StatusBar,
   SafeAreaView,
-  Text,
 } from 'react-native';
 
-import MenuButton from '../../components/MenuButton';
 import Greeter from '../../components/Greeter';
-import MenuDeck from '../../components/MenuDeck';
 import HeaderTitle from '../../components/HeaderTitle';
 import InternetIndicator from '../../components/InternetIndicator';
+import ListItem from '../../components/ListItem';
 
-function WalletScreen({ navigation }) {
-  const changeScreen = (screenName) => alert(screenName);
+function WalletScreen(props) {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <Greeter username={'Wallet !'} />
+        <ListItem text="Activation" />
+        <ListItem text="Wallet Address" />
       </SafeAreaView>
     </>
   );
