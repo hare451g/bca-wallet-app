@@ -4,19 +4,17 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import Greeter from '../../components/Greeter';
 import HeaderTitle from '../../components/HeaderTitle';
 import InternetIndicator from '../../components/InternetIndicator';
-import ListItem from '../../components/ListItem';
+import WalletMenuList from '../../containers/WalletMenuList';
+
 
 function WalletScreen(props) {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Greeter username={'Wallet !'} />
-        <ListItem text="Activation" />
-        <ListItem text="Wallet Address" />
+        <WalletMenuList />
       </SafeAreaView>
     </>
   );
