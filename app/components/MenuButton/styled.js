@@ -29,7 +29,7 @@ const MenuButtonIcon = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const MenuButtonText = styled.Text`
   color: ${colors.textPrimary};

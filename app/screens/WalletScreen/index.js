@@ -2,30 +2,28 @@ import React from 'react';
 import {
   StatusBar,
   SafeAreaView,
-  Text,
 } from 'react-native';
 
-import MenuDeck from '../../containers/MenuDeck';
-import Greeter from '../../components/Greeter';
 import HeaderTitle from '../../components/HeaderTitle';
 import InternetIndicator from '../../components/InternetIndicator';
+import WalletMenuList from '../../containers/WalletMenuList';
 
-function HomeScreen({ navigation }) {
+
+function WalletScreen(props) {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <Greeter username={'Om Rilham'} />
-        <MenuDeck navigation={navigation} />
+        <WalletMenuList />
       </SafeAreaView>
     </>
   );
 };
 
-HomeScreen.navigationOptions = () => ({
+WalletScreen.navigationOptions = () => ({
   title: 'BCAmobile',
   headerTitle: (<HeaderTitle>BCAmobile</HeaderTitle>),
   headerRight: (<InternetIndicator />),
 });
 
-export default HomeScreen;
+export default WalletScreen;
