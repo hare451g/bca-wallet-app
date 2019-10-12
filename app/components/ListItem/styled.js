@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../configs/themes';
 
-const ListItemContainer = styled.View`
+const ListItemContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

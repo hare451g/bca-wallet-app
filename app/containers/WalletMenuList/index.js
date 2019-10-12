@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { Text, SectionList } from 'react-native';
@@ -13,9 +13,19 @@ import {
   Header,
   HeaderText,
 } from './styled';
+import PinAuthModal from '../PinAuthModal';
+import useToggle from '../../hooks/useToggle';
 
 
 function WalletMenuList(props) {
+  const [isPinVisible, togglePinVisible] = useToggle(false);
+
+  const handleListItemPress = (value) => {
+    if (value === 'activate_wallet') {
+      togglePinVisible();
+    }
+  }
+
   return (
     <WalletSettingContainer>
       <Header>
@@ -28,18 +38,24 @@ function WalletMenuList(props) {
         sections={[
           {
             title: 'Wallet Settings',
-            data: ['Activation', 'Wallet Address']
+            data: [
+              { text: 'Activation', value: 'activate_wallet' },
+              { text: 'Wallet Address', value: 'show_wallet' },
+            ]
           }
         ]}
-        renderItem={({ item }) => <ListItem text={item} />}
+        renderItem={({ item: { text, value } }) => (
+          <ListItem text={text} value={value} onPress={handleListItemPress} />
+        )}
         renderSectionHeader={({ section }) => (
           <SectionHeader>
-            <SectionHeaderTitle>
-              {section.title}
-            </SectionHeaderTitle>
+            <SectionHeaderTitle> {section.title} </SectionHeaderTitle>
           </SectionHeader>
         )}
         keyExtractor={(item, index) => `wallet-config-${index}`}
+      />
+      <PinAuthModal
+        isOpen={isPinVisible} toggleModal={togglePinVisible}
       />
     </WalletSettingContainer>
   );
