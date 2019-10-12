@@ -4,12 +4,11 @@ import MenuButton from '../../components/MenuButton';
 
 import { Menu } from './constants';
 import MenuDeckContainer from './styled';
+import useNavigation from '../../hooks/useNavigation';
 
 function MenuDeck({ navigation }) {
-  const changeScreen = (screenName) => {
-    console.log(screenName);
-    navigation.navigate(screenName);
-  }
+  const navigate = useNavigation(navigation);
+
   return (
     <MenuDeckContainer>
       {Menu.map(({ text, icon, screenName }) => (
@@ -18,7 +17,7 @@ function MenuDeck({ navigation }) {
           text={text}
           icon={icon}
           screenName={screenName}
-          onPress={() => { changeScreen(screenName) }}
+          onPress={() => { navigate(screenName) }}
         />
       ))}
       <MenuButton none />
