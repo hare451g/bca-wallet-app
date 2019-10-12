@@ -9,9 +9,10 @@ import MenuButton from '../../components/MenuButton';
 import Greeter from '../../components/Greeter';
 import MenuDeck from '../../components/MenuDeck';
 import HeaderTitle from '../../components/HeaderTitle';
+import InternetIndicator from '../../components/InternetIndicator';
 
 function HomeScreen({ navigation }) {
-  const changeScreen = (screenName) => navigation.navigate(screenName);
+  const changeScreen = (screenName) => alert(screenName);
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -26,6 +27,7 @@ function HomeScreen({ navigation }) {
           <MenuButton text="QR" onPress={() => changeScreen('info')} />
           <MenuButton text="m-Admin" onPress={() => changeScreen('Home')} />
           <MenuButton text="Wallet" onPress={() => changeScreen('Wallet')} />
+          <MenuButton text="Wallet" onPress={() => changeScreen('Wallet')} />
         </MenuDeck>
       </SafeAreaView>
     </>
@@ -34,7 +36,8 @@ function HomeScreen({ navigation }) {
 
 HomeScreen.navigationOptions = () => ({
   title: 'BCAmobile',
-  headerTitle: <HeaderTitle>BCAmobile</HeaderTitle>
+  headerTitle: (<HeaderTitle>BCAmobile</HeaderTitle>),
+  headerRight: (<InternetIndicator />),
 });
 
 export default HomeScreen;
