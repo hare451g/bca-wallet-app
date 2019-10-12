@@ -19,15 +19,15 @@ function HomeScreen({ navigation }) {
       <SafeAreaView>
         <Greeter username={'Om Rilham'} />
         <MenuDeck>
-          <MenuButton text="m-Info" onPress={() => changeScreen('info')} />
-          <MenuButton text="m-Transfer" onPress={() => changeScreen('info')} />
-          <MenuButton text="m-Payment" onPress={() => changeScreen('info')} />
-          <MenuButton text="m-Commerce" onPress={() => changeScreen('info')} />
-          <MenuButton text="Setor Tarik" onPress={() => changeScreen('info')} />
-          <MenuButton text="QR" onPress={() => changeScreen('info')} />
-          <MenuButton text="m-Admin" onPress={() => changeScreen('Home')} />
-          <MenuButton text="Wallet" onPress={() => changeScreen('Wallet')} />
-          <MenuButton text="Wallet" onPress={() => changeScreen('Wallet')} />
+          <MenuButton text="m-Info" icon="money-bill-alt" />
+          <MenuButton text="m-Transfer" icon="arrows-alt-h" />
+          <MenuButton text="m-Payment" icon="cash-register" />
+          <MenuButton text="m-Commerce" icon="shopping-cart" />
+          <MenuButton text="Setor Tarik" icon="money-bill-wave" />
+          <MenuButton text="QR" icon="qrcode" />
+          <MenuButton text="m-Admin" icon="cogs" />
+          <MenuButton text="Wallet" icon="wallet" />
+          <MenuButton none />
         </MenuDeck>
       </SafeAreaView>
     </>
