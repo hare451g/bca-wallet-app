@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  Modal,
-  Text,
-  TouchableHighlight,
-  View,
-  TextInput,
-} from 'react-native';
+import React from 'react';
+import {Modal, View} from 'react-native';
 
 import {
   ModalContainer,
@@ -13,10 +7,10 @@ import {
   ModalButtonLabel,
   ModalButtonContainer,
   ModalTitle,
-  ModalInput
+  ModalInput,
 } from './styled';
 
-function PinAuthModal({ isOpen = false, toggleModal }) {
+function PinAuthModal({isOpen = false, toggleModal}) {
   return (
     <View>
       <Modal
@@ -33,10 +27,10 @@ function PinAuthModal({ isOpen = false, toggleModal }) {
               secureTextEntry
             />
             <ModalButtonContainer>
-              <ModalButton onPress={toggleModal} >
+              <ModalButton onPress={toggleModal}>
                 <ModalButtonLabel>Cancel</ModalButtonLabel>
               </ModalButton>
-              <ModalButton onPress={toggleModal} >
+              <ModalButton onPress={toggleModal}>
                 <ModalButtonLabel>Submit</ModalButtonLabel>
               </ModalButton>
             </ModalButtonContainer>
@@ -45,6 +39,6 @@ function PinAuthModal({ isOpen = false, toggleModal }) {
       </Modal>
     </View>
   );
-};
+}
 
 export default PinAuthModal;
