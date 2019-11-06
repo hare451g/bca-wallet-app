@@ -1,5 +1,7 @@
-import React from 'react';
-import {Modal, View} from 'react-native';
+import React, {useCallback, useEffect} from 'react';
+import {Modal, View, Text} from 'react-native';
+
+import {useStoreState, useStoreActions} from 'easy-peasy';
 
 import {
   ModalContainer,
@@ -10,7 +12,29 @@ import {
   ModalInput,
 } from './styled';
 
+import useInput from '../../hooks/useInput';
+
 function PinAuthModal({isOpen = false, toggleModal}) {
+  const {loading} = useStoreState(state => state.auth);
+  const {submitLogin} = useStoreActions(actions => actions.auth);
+
+  const [pin, setPin] = useInput(null);
+
+  const handleSubmitButton = () => {
+    submitLogin({
+      pin,
+      accountNumber: '9002418856235',
+    });
+  };
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading . . . </Text>
+      </View>
+    );
+  }
+
   return (
     <View>
       <Modal
@@ -25,12 +49,14 @@ function PinAuthModal({isOpen = false, toggleModal}) {
               keyboardType="number-pad"
               maxLength={6}
               secureTextEntry
+              onChangeText={setPin}
+              value={pin}
             />
             <ModalButtonContainer>
               <ModalButton onPress={toggleModal}>
                 <ModalButtonLabel>Cancel</ModalButtonLabel>
               </ModalButton>
-              <ModalButton onPress={toggleModal}>
+              <ModalButton onPress={handleSubmitButton}>
                 <ModalButtonLabel>Submit</ModalButtonLabel>
               </ModalButton>
             </ModalButtonContainer>
