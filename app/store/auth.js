@@ -3,6 +3,7 @@ import {action, thunk} from 'easy-peasy';
 import {AUTH_URL} from '../configs/api';
 
 const initialState = {
+  id: '',
   accountNumber: '',
   pin: '',
   token: '',
@@ -16,7 +17,9 @@ const reducers = {
   }),
 
   resetState: action((state, payload) => {
-    state = initialState;
+    state.error = null;
+    state.token = '';
+    state.loading = false;
   }),
 
   onSubmitLogin: action((state, payload) => {
@@ -35,6 +38,7 @@ const reducers = {
     state.loading = false;
     state.error = null;
     state.token = payload.token;
+    state.id = payload.id;
   }),
 };
 
@@ -49,10 +53,11 @@ const thunks = {
 
       const response = await post(`${AUTH_URL}/obtain-token/`, requestBody);
 
-      const {type, authorization} = response.data;
+      const {type, authorization, id} = response.data;
 
       actions.onLoginSuccess({
         token: `${type} ${authorization}`,
+        id,
       });
     } catch (error) {
       actions.onLoginFailed({error});

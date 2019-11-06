@@ -1,7 +1,5 @@
-import React, {useCallback, useEffect} from 'react';
+import React from 'react';
 import {Modal, View, Text} from 'react-native';
-
-import {useStoreState, useStoreActions} from 'easy-peasy';
 
 import {
   ModalContainer,
@@ -14,17 +12,11 @@ import {
 
 import useInput from '../../hooks/useInput';
 
-function PinAuthModal({isOpen = false, toggleModal}) {
-  const {loading} = useStoreState(state => state.auth);
-  const {submitLogin} = useStoreActions(actions => actions.auth);
-
+function PinAuthModal({isOpen = false, toggleModal, loading, onSubmit}) {
   const [pin, setPin] = useInput(null);
 
-  const handleSubmitButton = () => {
-    submitLogin({
-      pin,
-      accountNumber: '9002418856235',
-    });
+  const handleSubmit = () => {
+    onSubmit(pin);
   };
 
   if (loading) {
@@ -45,21 +37,29 @@ function PinAuthModal({isOpen = false, toggleModal}) {
         <ModalContainer>
           <View>
             <ModalTitle>Pin m-BCA:</ModalTitle>
-            <ModalInput
-              keyboardType="number-pad"
-              maxLength={6}
-              secureTextEntry
-              onChangeText={setPin}
-              value={pin}
-            />
-            <ModalButtonContainer>
-              <ModalButton onPress={toggleModal}>
-                <ModalButtonLabel>Cancel</ModalButtonLabel>
-              </ModalButton>
-              <ModalButton onPress={handleSubmitButton}>
-                <ModalButtonLabel>Submit</ModalButtonLabel>
-              </ModalButton>
-            </ModalButtonContainer>
+            {loading ? (
+              <View>
+                <Text>Loading . . . </Text>
+              </View>
+            ) : (
+              <>
+                <ModalInput
+                  keyboardType="number-pad"
+                  maxLength={6}
+                  secureTextEntry
+                  onChangeText={setPin}
+                  value={pin}
+                />
+                <ModalButtonContainer>
+                  <ModalButton onPress={toggleModal}>
+                    <ModalButtonLabel>Cancel</ModalButtonLabel>
+                  </ModalButton>
+                  <ModalButton onPress={handleSubmit}>
+                    <ModalButtonLabel>Submit</ModalButtonLabel>
+                  </ModalButton>
+                </ModalButtonContainer>
+              </>
+            )}
           </View>
         </ModalContainer>
       </Modal>
