@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import {useStoreState} from 'easy-peasy';
 
-import { Text, SectionList } from 'react-native';
+import {SectionList} from 'react-native';
 
 import ListItem from '../../components/ListItem';
 
@@ -15,15 +16,28 @@ import {
 } from './styled';
 import PinAuthModal from '../PinAuthModal';
 import useToggle from '../../hooks/useToggle';
-
+import {publicMenu, privateMenu} from './constants';
 
 function WalletMenuList(props) {
+  const {token} = useStoreState(state => state.auth);
   const [isPinVisible, togglePinVisible] = useToggle(false);
 
-  const handleListItemPress = (value) => {
+  const handleListItemPress = value => {
     if (value === 'activate_wallet') {
       togglePinVisible();
     }
+  };
+
+  // component did mount
+  useEffect(() => {
+    return () => {
+      resetState();
+    };
+  }, []);
+
+  let data = publicMenu;
+  if (token) {
+    data = privateMenu;
   }
 
   return (
@@ -32,31 +46,28 @@ function WalletMenuList(props) {
         <MenuButtonIcon>
           <Icon name="wallet" color="#ffffff" size={32} />
         </MenuButtonIcon>
-        <HeaderText>Wallet</HeaderText>
+        <HeaderText>BCA Smart Wallet</HeaderText>
       </Header>
       <SectionList
         sections={[
           {
-            title: 'Wallet Settings',
-            data: [
-              { text: 'Activation', value: 'activate_wallet' },
-              { text: 'Wallet Address', value: 'show_wallet' },
-            ]
-          }
+            title: '',
+            data,
+          },
         ]}
-        renderItem={({ item: { text, value } }) => (
+        renderItem={({item: {text, value}}) => (
           <ListItem text={text} value={value} onPress={handleListItemPress} />
         )}
-        renderSectionHeader={({ section }) => (
+        renderSectionHeader={({section}) => (
           <SectionHeader>
             <SectionHeaderTitle> {section.title} </SectionHeaderTitle>
           </SectionHeader>
         )}
         keyExtractor={(item, index) => `wallet-config-${index}`}
       />
-      <PinAuthModal
-        isOpen={isPinVisible} toggleModal={togglePinVisible}
-      />
+      {!token && (
+        <PinAuthModal isOpen={isPinVisible} toggleModal={togglePinVisible} />
+      )}
     </WalletSettingContainer>
   );
 }
