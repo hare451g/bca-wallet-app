@@ -1,10 +1,14 @@
 import React, {useEffect} from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {useStoreState} from 'easy-peasy';
-
 import {SectionList} from 'react-native';
+import {useStoreState, useStoreActions} from 'easy-peasy';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import ListItem from '../../components/ListItem';
+import PinAuthModal from '../PinAuthModal';
+import useToggle from '../../hooks/useToggle';
+import account from '../../configs/account';
+
+import {publicMenu, privateMenu} from './constants';
 
 import {
   WalletSettingContainer,
@@ -14,18 +18,28 @@ import {
   Header,
   HeaderText,
 } from './styled';
-import PinAuthModal from '../PinAuthModal';
-import useToggle from '../../hooks/useToggle';
-import {publicMenu, privateMenu} from './constants';
 
 function WalletMenuList(props) {
-  const {token} = useStoreState(state => state.auth);
+  const {token, loading} = useStoreState(state => state.auth);
+  const {submitLogin, resetState} = useStoreActions(actions => actions.auth);
+
   const [isPinVisible, togglePinVisible] = useToggle(false);
 
+  // handle list item pressed
   const handleListItemPress = value => {
-    if (value === 'activate_wallet') {
-      togglePinVisible();
+    switch (value) {
+      case 'activate_wallet':
+        togglePinVisible();
+        break;
     }
+  };
+
+  // handle pin auth to obtain token
+  const handleSubmitButton = pin => {
+    submitLogin({
+      pin,
+      accountNumber: account.number,
+    });
   };
 
   // component did mount
@@ -66,7 +80,11 @@ function WalletMenuList(props) {
         keyExtractor={(item, index) => `wallet-config-${index}`}
       />
       {!token && (
-        <PinAuthModal isOpen={isPinVisible} toggleModal={togglePinVisible} />
+        <PinAuthModal
+          isOpen={isPinVisible}
+          onSubmit={handleSubmitButton}
+          loading={loading}
+        />
       )}
     </WalletSettingContainer>
   );
