@@ -37,29 +37,21 @@ function PinAuthModal({isOpen = false, toggleModal, loading, onSubmit}) {
         <ModalContainer>
           <View>
             <ModalTitle>Pin m-BCA:</ModalTitle>
-            {loading ? (
-              <View>
-                <Text>Loading . . . </Text>
-              </View>
-            ) : (
-              <>
-                <ModalInput
-                  keyboardType="number-pad"
-                  maxLength={6}
-                  secureTextEntry
-                  onChangeText={setPin}
-                  value={pin}
-                />
-                <ModalButtonContainer>
-                  <ModalButton onPress={toggleModal}>
-                    <ModalButtonLabel>Cancel</ModalButtonLabel>
-                  </ModalButton>
-                  <ModalButton onPress={handleSubmit}>
-                    <ModalButtonLabel>Submit</ModalButtonLabel>
-                  </ModalButton>
-                </ModalButtonContainer>
-              </>
-            )}
+            <ModalInput
+              keyboardType="number-pad"
+              maxLength={6}
+              secureTextEntry
+              onChangeText={setPin}
+              value={pin}
+            />
+            <ModalButtonContainer>
+              <ModalButton onPress={toggleModal}>
+                <ModalButtonLabel>Cancel</ModalButtonLabel>
+              </ModalButton>
+              <ModalButton onPress={handleSubmit}>
+                <ModalButtonLabel>Submit</ModalButtonLabel>
+              </ModalButton>
+            </ModalButtonContainer>
           </View>
         </ModalContainer>
       </Modal>

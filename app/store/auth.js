@@ -1,6 +1,6 @@
 import {post} from 'axios';
 import {action, thunk} from 'easy-peasy';
-import {AUTH_URL} from '../configs/api';
+import {AUTH_URL, BASE_URL} from '../configs/api';
 
 const initialState = {
   id: '',
@@ -51,16 +51,20 @@ const thunks = {
         account_number: accountNumber,
       };
 
-      const response = await post(`${AUTH_URL}/obtain-token/`, requestBody);
+      const response = await post(
+        `${BASE_URL}/user-profile/obtain-token/`,
+        requestBody,
+      );
 
-      const {type, authorization, id} = response.data;
+      const {authorization, id} = response.data;
 
       actions.onLoginSuccess({
-        token: `${type} ${authorization}`,
+        token: `${authorization}`,
         id,
       });
     } catch (error) {
-      actions.onLoginFailed({error});
+      console.log(error);
+      actions.onLoginFailed(error);
     }
   }),
 };

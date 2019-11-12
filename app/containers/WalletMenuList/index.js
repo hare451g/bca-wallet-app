@@ -18,8 +18,12 @@ import {
   Header,
   HeaderText,
 } from './styled';
+import useNavigation from '../../hooks/useNavigation';
 
 function WalletMenuList(props) {
+  const {navigation} = props;
+  const navigate = useNavigation(navigation);
+
   const {token, loading} = useStoreState(state => state.auth);
   const {submitLogin, resetState} = useStoreActions(actions => actions.auth);
 
@@ -30,6 +34,9 @@ function WalletMenuList(props) {
     switch (value) {
       case 'activate_wallet':
         togglePinVisible();
+        break;
+      case 'transfer_wallet':
+        navigate('TransferScreen');
         break;
     }
   };
@@ -84,6 +91,7 @@ function WalletMenuList(props) {
           isOpen={isPinVisible}
           onSubmit={handleSubmitButton}
           loading={loading}
+          toggleModal={togglePinVisible}
         />
       )}
     </WalletSettingContainer>
